@@ -1,5 +1,4 @@
 require "crypto_prices/version"
-
-module CryptoPrices
-  # Your code goes here...
-end
+require "crypto_prices/cli"
+require "crypto_prices/crypto"
+require "crypto_prices/scrapper"
