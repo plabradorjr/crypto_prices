@@ -1,8 +1,7 @@
-# CryptoPrices
+# Top 10 Crypto Price Checker
 
-This is a command line interface (CLI) that scrapes coinmarketcap.com to show the top 10 cryptocurrencies based on market capitalization.
+This is a command line interface (CLI) that scrapes coinmarketcap.com to show you the top 10 cryptocurrencies based on market capitalization.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/crypto_prices`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 ## Installation
 
