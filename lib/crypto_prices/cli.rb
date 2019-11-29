@@ -22,8 +22,9 @@ class CLI
 
       Crypto.all.each.with_index(1) do |coin, i|
         if i  < 11
-        puts "| #{i}  | #{coin.name}  | #{coin.price} |"
-        puts "-"*40
+        l = "| #{i}  | #{coin.name} | #{coin.price} |"
+        puts l
+        puts "-"*(l.length.to_i)
         end
 
       end
@@ -31,9 +32,9 @@ class CLI
   end
 
   def header
-    bar = "="*40
+    bar = "="*31
     puts bar
-    puts "|Rank|     Coin     |   Price (USD)    |"
+    puts "|Rank| Coin    | Price (USD) |"
     puts bar
   end
 
