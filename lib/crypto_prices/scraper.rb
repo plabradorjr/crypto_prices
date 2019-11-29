@@ -12,7 +12,7 @@ class Scraper
       crypto_price = coins.css("a.price").text
       price_change = coins.css("td.no-wrap.percent-change").text
       volume = coins.css("a.volume").text
-      market_cap = coins.css("td.no-wrap.market-cap.text-right").text
+      market_cap = coins.css("td.no-wrap.market-cap.text-right").text.strip
 
       currencies << {name: crypto_name, price: crypto_price, p_change: price_change, volume: volume, m_cap: market_cap}
     end
