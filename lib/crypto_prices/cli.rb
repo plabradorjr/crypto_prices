@@ -28,34 +28,39 @@ class CLI
 
   def header
     keys = "|Rank| Coin    | Price(USD) |"
-    puts "=" * (keys.length.to_i)
-    puts keys.colorize(:blue)
-    puts "=" * (keys.length.to_i)
+    line = "=" * (keys.length.to_i)
+    puts line.colorize(:green)
+    puts keys.colorize(:green)
+    puts line.colorize(:green)
   end
 
   def all_header
     keys = "|Rank| Coin    | Price(USD) | Market Cap (USD)  | 24 Hr Volume | 24hr %Change |"
-    puts "=" * (keys.length.to_i)
-    puts keys
-    puts "=" * (keys.length.to_i)
+    line = "=" * (keys.length.to_i)
+    puts line.colorize(:green)
+    puts keys.colorize(:green)
+    puts line.colorize(:green)
   end
 
   def ask_user
     puts """
     Want to see more details?
 
-    enter \"yes\" to show market cap, volume, and 24hr % price change
+    enter \"more\" to show market cap, volume, and 24hr % price change
     enter \"100\" to show top 100 crypto with all details
     enter \"exit\" to end program
     """
 
     input = gets.chomp.upcase
 
-    if input == "YES"
+    if input == "MORE"
       display_more_details
+      ask_user
+    elsif input == "100"
+      display_100
+      ask_user
     else
-
-      puts input
+      puts "Thanks for checking. You have exited the program."
     end
 
   end
@@ -69,6 +74,16 @@ class CLI
         puts l
         puts "-"*(l.length.to_i)
         end
+      end
+  end
+
+  def display_100
+    all_header
+
+      Crypto.all.each.with_index(1) do |coin, i|
+        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.volume} | #{coin.p_change} |"
+        puts l
+        puts "-"*(l.length.to_i)
       end
   end
 

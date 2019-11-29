@@ -1,27 +1,12 @@
-# Top 10 Crypto Price Checker
+# Instant Crypto Price Checker
 
-This is a command line interface (CLI) that scrapes coinmarketcap.com to show you the top 10 cryptocurrencies based on market capitalization.
-
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'crypto_prices'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install crypto_prices
+This is a command line interface (CLI) that scrapes coinmarketcap.com to show you the most up-to-date top 10 cryptocurrencies based on market capitalization.
 
 ## Usage
 
-TODO: Write usage instructions here
+Run `$ bundle install`
+
+Then run `bin/run_me` from your terminal. This will start the application.
 
 ## Development
 
