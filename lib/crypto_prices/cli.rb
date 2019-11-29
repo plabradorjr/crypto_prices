@@ -1,16 +1,16 @@
 class CLI
 
+  WEBSITE = "https://coinmarketcap.com/"
+
   def run
     make_crypto_objects
     display_top10
     ask_user
-    # add method to ask user input to show more details
-      ## ask_user
-    # add another method to exit
   end
 
   def make_crypto_objects
-    crypto_array = Scraper.scrape_url("https://coinmarketcap.com/")
+    crypto_array = Scraper.scrape_url(WEBSITE)
+    # enter else statement here if nokogir srapes incorrectly
     Crypto.create_objects_from_array(crypto_array)
   end
 
