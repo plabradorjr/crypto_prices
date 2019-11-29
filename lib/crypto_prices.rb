@@ -5,3 +5,4 @@ require "crypto_prices/scraper"
 
 require 'pry'
 require 'nokogiri'
+require 'open-uri'

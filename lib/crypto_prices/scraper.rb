@@ -1,6 +1,6 @@
 class Scraper
 
-  def scrape_url(site)
+  def self.scrape_url(site)
 
     doc = Nokogiri::HTML(open(site))
     currencies = []

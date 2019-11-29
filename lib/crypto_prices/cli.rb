@@ -1,9 +1,40 @@
 class CLI
 
+  # WEBSITE = "https://coinmarketcap.com/"
+
   def run
-    puts "Welcome! Here are today's top 10 cryptocurrencies"
+    header
+    make_crypto_objects
+    display_top10
     # add method to ask user input to show more details
+      ## make_crypto_objects
+    # add method to display objects
+      ## display_table
     # add another method to exit
+  end
+
+  def make_crypto_objects
+    crypto_array = Scraper.scrape_url("https://coinmarketcap.com/")
+    Crypto.create_objects_from_array(crypto_array)
+  end
+
+  def display_top10
+
+      Crypto.all.each.with_index(1) do |coin, i|
+        if i  < 11
+        puts "| #{i}  | #{coin.name}  | #{coin.price} |"
+        puts "-"*40
+        end
+
+      end
+
+  end
+
+  def header
+    bar = "="*40
+    puts bar
+    puts "|Rank|     Coin     |   Price (USD)    |"
+    puts bar
   end
 
 end
