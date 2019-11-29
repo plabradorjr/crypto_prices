@@ -4,10 +4,7 @@ This is a command line interface (CLI) that scrapes coinmarketcap.com to show yo
 
 ## Usage
 
-From your terminal, run
-```
-$ bundle install
-```
+After checking out the repo, run `bin/setup` to install dependencies.
 
 Once completed, run
 ```
