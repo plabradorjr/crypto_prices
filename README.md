@@ -1,12 +1,17 @@
 # Instant Crypto Price Checker
 
-This is a command line interface (CLI) that scrapes coinmarketcap.com to show you the most up-to-date top 10 cryptocurrencies based on market capitalization.
+This is a command line interface (CLI) that scrapes coinmarketcap.com to show you the current top ranking cryptocurrencies based on market capitalization.
 
 ## Usage
 
-Run `$ bundle install`
+Run
+```
+$ bundle install
+```
 
-Then run `bin/run_me` from your terminal. This will start the application.
+Then run
+`` $bin/run_me```
+from your terminal. This will start the application.
 
 ## Development
 
@@ -16,7 +21,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/crypto_prices. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/plabradorjr/crypto_prices. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
