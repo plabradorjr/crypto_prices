@@ -1,4 +1,4 @@
-class CryptoPrices::Scraper
+class Scraper
 
   def scrape_url(site)
 
@@ -18,5 +18,6 @@ class CryptoPrices::Scraper
     end
 
     currencies
+  end
 
 end
