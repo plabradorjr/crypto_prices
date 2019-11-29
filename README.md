@@ -10,7 +10,9 @@ $ bundle install
 ```
 
 Then run
-`` $bin/run_me```
+```
+$bin/run_me
+```
 from your terminal. This will start the application.
 
 ## Development
