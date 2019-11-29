@@ -4,16 +4,16 @@ This is a command line interface (CLI) that scrapes coinmarketcap.com to show yo
 
 ## Usage
 
-Run
+From your terminal, run
 ```
 $ bundle install
 ```
 
-Then run
+Once completed, run
 ```
-$bin/run_me
+$ bin/run_me
 ```
-from your terminal. This will start the application.
+This will start the application.
 
 ## Development
 
