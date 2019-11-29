@@ -11,7 +11,11 @@ class CLI
   def make_crypto_objects
     crypto_array = Scraper.scrape_url(WEBSITE)
     # enter else statement here if nokogir srapes incorrectly
+    if crypto_array[0][:name] == ""
+      make_crypto_objects
+    else
     Crypto.create_objects_from_array(crypto_array)
+    end
   end
 
   def display_top10
