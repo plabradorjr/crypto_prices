@@ -6,13 +6,17 @@ class CryptoPrices::Scraper
     currencies = []
 
     table = doc.css("tbody")
-
     rows = table.css("tr")
-
     rows.each do |coins|
       crypto_name =  coins.css("a.currency-name-container.link-secondary").text
       crypto_price = coins.css("a.price").text
+      price_change = coins.css("td.no-wrap.percent-change").text
+      volume = coins.css("a.volume").text
+      market_cap = coins.css("td.no-wrap.market-cap.text-right").text
+
+      currencies << {name: crypto_name, price: crypto_price, change: price_change, volume: volume, cap: market_cap}
     end
 
+    currencies
 
 end
