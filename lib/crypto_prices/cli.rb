@@ -44,8 +44,9 @@ class CLI
   def ask_user
     puts """
     Want to see more cryptocurrencies?
-    I can show you up to 100 coins,
-    simply enter a number between \"1 - 100\".
+    enter a number between \"1 - 100\", I can show you up to 100 coins.
+
+    enter \"r\" to refresh the prices
 
     enter \"exit\" to end program
     """
@@ -58,8 +59,10 @@ class CLI
       ask_user
     elsif input.downcase == "exit"
       puts "Thanks for checking. You have exited the program."
+    elsif input.downcase == "r"
+      refresh_prices
     else
-      puts "not sure what that means, so the program exited"
+      puts "not sure what that means, so the program exited."
     end
   end
 
@@ -87,5 +90,8 @@ class CLI
       end
   end
 
-
+  def refresh_prices
+    Crypto.clear_all
+    CLI.new.run
+  end
 end
