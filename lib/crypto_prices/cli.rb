@@ -57,13 +57,16 @@ class CLI
     enter \"exit\" to end program
     """
 
-    input = gets.chomp.to_i
+    input = gets.chomp
 
-    if input != "exit"
-      display_more(input)
+    if input.to_i > 0 && input.to_i <101
+      number = input.to_i
+      display_more(number)
       ask_user
-    else
+    elsif input.downcase == "exit"
       puts "Thanks for checking. You have exited the program."
+    else
+      puts "not sure what that means, so program exited"
     end
 
   end
