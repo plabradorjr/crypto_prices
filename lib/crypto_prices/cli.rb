@@ -21,24 +21,17 @@ class CLI
   end
 
   def display_top10
-    header
+    all_header
 
       Crypto.all.each.with_index(1) do |coin, i|
         if i  < 11
-        l = "| #{i}  | #{coin.name} | #{coin.price} |"
+        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.p_change} |"
         puts l
         puts "-"*(l.length.to_i)
         end
       end
   end
 
-  def header
-    keys = "|Rank| Coin    | Price(USD) |"
-    line = "=" * (keys.length.to_i)
-    puts line.colorize(:green)
-    puts keys.colorize(:green)
-    puts line.colorize(:green)
-  end
 
   def all_header
     keys = "|Rank| Coin    | Price(USD) | Market Cap (USD) | 24hr %Change |"
@@ -66,22 +59,10 @@ class CLI
     elsif input.downcase == "exit"
       puts "Thanks for checking. You have exited the program."
     else
-      puts "not sure what that means, so program exited"
+      puts "not sure what that means, so the program exited"
     end
-
   end
 
-  def display_more_details
-    all_header
-
-      Crypto.all.each.with_index(1) do |coin, i|
-        if i  < 11
-        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.p_change} |"
-        puts l
-        puts "-"*(l.length.to_i)
-        end
-      end
-  end
 
   def display_100
     all_header
@@ -104,7 +85,6 @@ class CLI
         puts "-"*(l.length.to_i)
         end
       end
-
   end
 
 
