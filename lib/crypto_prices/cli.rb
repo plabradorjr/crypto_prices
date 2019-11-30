@@ -50,9 +50,10 @@ class CLI
 
   def ask_user
     puts """
-    Want to see more coins?
+    Want to see more cryptocurrencies?
+    I can show you up to 100 coins,
+    simply enter a number between \"1 - 100\".
 
-    enter a number between \"1 - 100\" to display more coins of that number
     enter \"exit\" to end program
     """
 
