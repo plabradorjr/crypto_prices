@@ -41,7 +41,7 @@ class CLI
   end
 
   def all_header
-    keys = "|Rank| Coin    | Price(USD) | Market Cap (USD)  | 24 Hr Volume | 24hr %Change |"
+    keys = "|Rank| Coin    | Price(USD) | Market Cap (USD) | 24hr %Change |"
     line = "=" * (keys.length.to_i)
     puts line.colorize(:green)
     puts keys.colorize(:green)
@@ -50,20 +50,16 @@ class CLI
 
   def ask_user
     puts """
-    Want to see more details?
+    Want to see more coins?
 
-    enter \"more\" to show market cap, volume, and 24hr % price change
-    enter \"100\" to show top 100 crypto with all details
+    enter a number between \"1 - 100\" to display more coins of that number
     enter \"exit\" to end program
     """
 
-    input = gets.chomp.upcase
+    input = gets.chomp.to_i
 
-    if input == "MORE"
-      display_more_details
-      ask_user
-    elsif input == "100"
-      display_100
+    if input != "exit"
+      display_more(input)
       ask_user
     else
       puts "Thanks for checking. You have exited the program."
@@ -76,7 +72,7 @@ class CLI
 
       Crypto.all.each.with_index(1) do |coin, i|
         if i  < 11
-        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.volume} | #{coin.p_change} |"
+        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.p_change} |"
         puts l
         puts "-"*(l.length.to_i)
         end
@@ -87,10 +83,25 @@ class CLI
     all_header
 
       Crypto.all.each.with_index(1) do |coin, i|
-        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.volume} | #{coin.p_change} |"
+        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.p_change} |"
         puts l
         puts "-"*(l.length.to_i)
       end
   end
+
+  def display_more(input)
+    number = (input + 1)
+    all_header
+
+      Crypto.all.each.with_index(1) do |coin, i|
+        if i  < number
+        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.p_change} |"
+        puts l
+        puts "-"*(l.length.to_i)
+        end
+      end
+
+  end
+
 
 end
