@@ -1,4 +1,4 @@
-# Instant Crypto Price Checker
+# CLI Crypto Price Checker
 
 This is a command line interface (CLI) that scrapes coinmarketcap.com to show you the current top ranking cryptocurrencies based on market capitalization.
 
