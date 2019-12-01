@@ -32,7 +32,6 @@ class CLI
       end
   end
 
-
   def all_header
     keys = "|Rank| Coin    | Price(USD) | Market Cap (USD) | 24hr %Change |"
     line = "=" * (keys.length.to_i)
@@ -42,14 +41,15 @@ class CLI
   end
 
   def ask_user
-    puts """
-    Want to see more cryptocurrencies?
-    enter a number between \"1 - 100\", I can show you up to 100 coins.
 
-    enter \"r\" to refresh the prices
-
-    enter \"exit\" to end program
-    """
+    puts " "
+    puts "\t Want to see more cryptocurrencies?"
+    puts "\t enter a number between " + "\"1 - 100\"".colorize(:green)
+    puts "\t I can show you up to 100 coins."
+    puts " "
+    puts "\t enter " + "\"r\"".colorize(:green) + " to refresh the prices"
+    puts " "
+    puts "\t enter " + "\"exit\"".colorize(:green) + " to end program"
 
     input = gets.chomp
 
@@ -65,7 +65,6 @@ class CLI
       puts "not sure what that means, so the program exited."
     end
   end
-
 
   def display_100
     all_header
@@ -92,6 +91,10 @@ class CLI
 
   def refresh_prices
     Crypto.clear_all
+
+    puts " prices refreshed, yay! ".colorize(:yellow)
+    puts "🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀"
+    puts " "
     CLI.new.run
   end
 end
