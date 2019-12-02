@@ -25,19 +25,27 @@ class CLI
 
       Crypto.all.each.with_index(1) do |coin, i|
         if i  < 11
-        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.p_change} |"
-        puts l
-        puts "-"*(l.length.to_i)
+          if coin.p_change.to_f < 0
+            percent = coin.p_change
+            l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} |" + "#{percent}".colorize(:red) + " |"
+            puts l
+            puts "-"*((l.length.to_i) - 14)
+          else
+            percent = coin.p_change
+            l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} |" + "#{percent}".colorize(:green) + " |"
+            puts l
+            puts "-"*((l.length.to_i) - 14)
+          end
         end
       end
   end
 
   def all_header
-    keys = "|Rank| Coin    | Price(USD) | Market Cap (USD) | 24hr %Change |"
+    keys = "|Rank| Name    | Price(USD) | Market Cap (USD) | 24hr %Change |"
     line = "=" * (keys.length.to_i)
-    puts line.colorize(:green)
-    puts keys.colorize(:green)
-    puts line.colorize(:green)
+    puts line.colorize(:yellow)
+    puts keys.colorize(:yellow)
+    puts line.colorize(:yellow)
   end
 
   def ask_user
@@ -58,11 +66,11 @@ class CLI
       display_more(number)
       ask_user
     elsif input.downcase == "exit"
-      puts "Thanks for checking. You have exited the program."
+      puts "Thanks for checking. You have exited the program.".colorize(:green)
     elsif input.downcase == "r"
       refresh_prices
     else
-      puts "not sure what that means, so the program exited."
+      puts "not sure what that means, so the program exited.".colorize(:red)
     end
   end
 
@@ -82,9 +90,17 @@ class CLI
 
       Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
-        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.p_change} |"
-        puts l
-        puts "-"*(l.length.to_i)
+          if coin.p_change.to_f < 0
+            percent = coin.p_change
+            l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} |" + "#{percent}".colorize(:red) + " |"
+            puts l
+            puts "-"*((l.length.to_i) - 14)
+          else
+            percent = coin.p_change
+            l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} |" + "#{percent}".colorize(:green) + " |"
+            puts l
+            puts "-"*((l.length.to_i) - 14)
+          end
         end
       end
   end
