@@ -26,22 +26,18 @@ class CLI
       Crypto.all.each.with_index(1) do |coin, i|
         if i  < 11
           if coin.p_change.to_f < 0
-            percent = coin.p_change
-            l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} |" + "#{percent}".colorize(:red) + " |"
-            puts l
-            puts "-"*((l.length.to_i) - 14)
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(18, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
+            puts "-" * 76
           else
-            percent = coin.p_change
-            l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} |" + "#{percent}".colorize(:green) + " |"
-            puts l
-            puts "-"*((l.length.to_i) - 14)
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(18, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|"
+            puts "-" * 76
           end
         end
       end
   end
 
   def all_header
-    keys = "|Rank| Name    | Price(USD) | Market Cap (USD) | 24hr %Change |"
+    keys = "|Rank | Name            | Price(USD)    | Market Cap (USD)  | 24hr %Change |"
     line = "=" * (keys.length.to_i)
     puts line.colorize(:yellow)
     puts keys.colorize(:yellow)
@@ -74,16 +70,6 @@ class CLI
     end
   end
 
-  def display_100
-    all_header
-
-      Crypto.all.each.with_index(1) do |coin, i|
-        l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} | #{coin.p_change} |"
-        puts l
-        puts "-"*(l.length.to_i)
-      end
-  end
-
   def display_more(input)
     number = (input + 1)
     all_header
@@ -91,15 +77,11 @@ class CLI
       Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
           if coin.p_change.to_f < 0
-            percent = coin.p_change
-            l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} |" + "#{percent}".colorize(:red) + " |"
-            puts l
-            puts "-"*((l.length.to_i) - 14)
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(18, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
+            puts "-" * 76
           else
-            percent = coin.p_change
-            l = "| #{i}  | #{coin.name} | #{coin.price} | #{coin.m_cap} |" + "#{percent}".colorize(:green) + " |"
-            puts l
-            puts "-"*((l.length.to_i) - 14)
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(18, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|"
+            puts "-" * 76
           end
         end
       end
