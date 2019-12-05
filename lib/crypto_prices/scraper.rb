@@ -9,11 +9,11 @@ class Scraper
     rows = table.css("tr")
 
       rows.each do |coins|
-        crypto_name =  coins.css("a.currency-name-container.link-secondary").text
-        crypto_price = coins.css("a.price").text
-        price_change = coins.css("td.no-wrap.percent-change").text
-        volume = coins.css("a.volume").text
-        market_cap = coins.css("td.no-wrap.market-cap.text-right").text.strip
+        crypto_name =  coins.css("td.cmc-table__cell.cmc-table__cell--sticky.cmc-table__cell--sortable.cmc-table__cell--left.cmc-table__cell--sort-by__name").text
+        crypto_price = coins.css("td.cmc-table__cell.cmc-table__cell--sortable.cmc-table__cell--right.cmc-table__cell--sort-by__price").text
+        price_change = coins.css("td.cmc-table__cell.cmc-table__cell--sortable.cmc-table__cell--right.cmc-table__cell--sort-by__percent-change-24-h").text
+        volume = coins.css("td.cmc-table__cell.cmc-table__cell--sortable.cmc-table__cell--right.cmc-table__cell--sort-by__volume-24-h").text
+        market_cap = coins.css("td.cmc-table__cell.cmc-table__cell--sortable.cmc-table__cell--right.cmc-table__cell--sort-by__market-cap").text.strip
 
         currencies << {name: crypto_name, price: crypto_price, p_change: price_change, volume: volume, m_cap: market_cap}
       end
