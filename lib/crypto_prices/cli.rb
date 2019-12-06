@@ -51,7 +51,7 @@ class CLI
   end
 
   def volume_header
-    keys = "|Rank | Name                   | Price(USD)    | Market Cap (USD)  | 24hr %Change | Volume (USD)     |"
+    keys = "|Rank | Name                   | Price(USD)    | Market Cap (USD)  | 24hr %Change | 24hr Volume (USD)|"
     line = "=" * (keys.length.to_i)
     puts line.colorize(:yellow)
     puts keys.colorize(:yellow)
