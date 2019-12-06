@@ -3,7 +3,7 @@
 This is a command line interface (CLI) that scrapes coinmarketcap.com to show you the current top ranking cryptocurrencies based on market capitalization. Here's a sample screen shot
 
 
-![screen shot image](https://shill.lol/wp-content/uploads/2019/12/screen-shot-2019-12-02-at-7.11.46-am.png)
+![screen shot image](https://drive.google.com/open?id=1lBk-j_5xSM0SXv1PcIQGX1l5shIER3zc)
 
 ## Install
 
