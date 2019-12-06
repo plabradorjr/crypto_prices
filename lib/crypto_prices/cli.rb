@@ -1,11 +1,14 @@
 class CLI
 
   WEBSITE = "https://coinmarketcap.com/"
+  @@counter = 0
 
   def run
     make_crypto_objects
-    display_top10
-    ask_user
+    if @@counter < 10
+      display_top10
+      ask_user
+    end
   end
 
   def make_crypto_objects
@@ -13,8 +16,11 @@ class CLI
     # sometimes nokogiri returns blank, it could be from the main website issue
     # this if-statement makes sure nokogiri re-scrapes the site if the initial
     # scrape returns blank
-    if crypto_array[0][:name] == ""
+    if (crypto_array[0][:name] == "") && (@@counter < 10)
+      @@counter += 1
       make_crypto_objects
+    elsif @@counter >= 10
+      puts "coinmarketcap.com has changed their webpage, edit your scraper file.".colorize(:red)
     else
     Crypto.create_objects_from_array(crypto_array)
     end
@@ -26,18 +32,18 @@ class CLI
       Crypto.all.each.with_index(1) do |coin, i|
         if i  < 11
           if coin.p_change.to_f < 0
-            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(18, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
-            puts "-" * 76
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
+            puts "-" * 83
           else
-            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(18, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|"
-            puts "-" * 76
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|"
+            puts "-" * 83
           end
         end
       end
   end
 
   def all_header
-    keys = "|Rank | Name            | Price(USD)    | Market Cap (USD)  | 24hr %Change |"
+    keys = "|Rank | Name                   | Price(USD)    | Market Cap (USD)  | 24hr %Change |"
     line = "=" * (keys.length.to_i)
     puts line.colorize(:yellow)
     puts keys.colorize(:yellow)
@@ -77,11 +83,11 @@ class CLI
       Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
           if coin.p_change.to_f < 0
-            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(18, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
-            puts "-" * 76
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
+            puts "-" * 83
           else
-            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(18, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|"
-            puts "-" * 76
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|"
+            puts "-" * 83
           end
         end
       end
@@ -89,9 +95,9 @@ class CLI
 
   def refresh_prices
     Crypto.clear_all
-
-    puts " prices refreshed, yay! ".colorize(:yellow)
-    puts "🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀"
+    @@counter = 0
+    puts " "
+    puts "🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" + " prices refreshed, woot! ".colorize(:yellow)
     puts " "
     CLI.new.run
   end
