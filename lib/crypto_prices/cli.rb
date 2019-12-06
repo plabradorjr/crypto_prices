@@ -50,6 +50,14 @@ class CLI
     puts line.colorize(:yellow)
   end
 
+  def volume_header
+    keys = "|Rank | Name                   | Price(USD)    | Market Cap (USD)  | 24hr %Change | Volume (USD)     |"
+    line = "=" * (keys.length.to_i)
+    puts line.colorize(:yellow)
+    puts keys.colorize(:yellow)
+    puts line.colorize(:yellow)
+  end
+
   def ask_user
 
     puts " "
@@ -58,6 +66,8 @@ class CLI
     puts "\t I can show you up to 100 coins."
     puts " "
     puts "\t enter " + "\"r\"".colorize(:green) + " to refresh the prices"
+    puts " "
+    puts "\t enter " + "\"v\"".colorize(:green) + " to show volume column"
     puts " "
     puts "\t enter " + "\"exit\"".colorize(:green) + " to end program"
 
@@ -71,6 +81,9 @@ class CLI
       puts "Thanks for checking. You have exited the program.".colorize(:green)
     elsif input.downcase == "r"
       refresh_prices
+    elsif input.downcase == "v"
+      display_volume
+      ask_user_again
     else
       puts "not sure what that means, so the program exited.".colorize(:red)
     end
@@ -101,4 +114,65 @@ class CLI
     puts " "
     CLI.new.run
   end
+
+  def display_volume
+    volume_header
+
+    Crypto.all.each.with_index(1) do |coin, i|
+      if i  < 11
+        if coin.p_change.to_f < 0
+          puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
+          puts "-" * 102
+        else
+          puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
+          puts "-" * 102
+        end
+      end
+    end
+    #ask_user_again
+  end
+
+  def ask_user_again
+
+    puts " "
+    puts "\t Want to see more cryptocurrencies?"
+    puts "\t enter a number between " + "\"1 - 100\"".colorize(:green)
+    puts "\t I can show you up to 100 coins."
+    puts " "
+    puts "\t enter " + "\"r\"".colorize(:green) + " to refresh the prices"
+    puts " "
+    puts "\t enter " + "\"exit\"".colorize(:green) + " to end program"
+
+    input = gets.chomp
+
+    if input.to_i > 0 && input.to_i <101
+      number = input.to_i
+      display_more_with_volume(number)
+      ask_user_again
+    elsif input.downcase == "exit"
+      puts "Thanks for checking. You have exited the program.".colorize(:green)
+    elsif input.downcase == "r"
+      refresh_prices
+    else
+      puts "not sure what that means, so the program exited.".colorize(:red)
+    end
+  end
+
+  def display_more_with_volume(input)
+    number = (input + 1)
+    volume_header
+
+      Crypto.all.each.with_index(1) do |coin, i|
+        if i  < number
+          if coin.p_change.to_f < 0
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
+            puts "-" * 102
+          else
+            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
+            puts "-" * 102
+          end
+        end
+      end
+  end
+
 end
