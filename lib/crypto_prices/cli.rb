@@ -55,11 +55,8 @@ class CryptoPrices::CLI
       number = input.to_i
       display_coins_without_details(number)
       ask_user_level2
-    elsif input.downcase == "exit"
-      austronaut
     else
-      puts "not sure what that means. Here\'s a list of my commands: ".colorize(:red)
-      show_commands
+      ask_user_conditions(input)
     end
   end
 
@@ -74,11 +71,8 @@ class CryptoPrices::CLI
       number = input.to_i
       display_all_coin_details(number)
       ask_user_level3
-    elsif input.downcase == "exit"
-      austronaut
     else
-      puts "not sure what that means. Here\'s a list of my commands: ".colorize(:red)
-      show_commands
+      ask_user_conditions(input)
     end
   end
 
@@ -93,11 +87,8 @@ class CryptoPrices::CLI
       number = input.to_i
       display_all_coin_details(number)
       ask_user_level4
-    elsif input.downcase == "exit"
-      austronaut
     else
-      puts "not sure what that means. Here\'s a list of my commands: ".colorize(:red)
-      show_commands
+      ask_user_conditions(input)
     end
   end
 
@@ -113,13 +104,8 @@ class CryptoPrices::CLI
       number = input.to_i
       display_all_coin_details(number)
       ask_user_level4
-    elsif input.downcase == "c"
-      show_commands
-    elsif input.downcase == "exit"
-      austronaut
     else
-      puts "not sure what that means. Here\'s a list of my commands: ".colorize(:red)
-      show_commands
+      ask_user_conditions(input)
     end
   end
 
@@ -140,7 +126,7 @@ class CryptoPrices::CLI
       end
   end
 
-  def refresh_prices
+  def refresh_and_restart_program
     CryptoPrices::Crypto.clear_all
     @@counter = 0
     puts "\n 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" + " prices refreshed, woot! \n".colorize(:yellow)
@@ -164,21 +150,47 @@ class CryptoPrices::CLI
   end
 
   def show_commands
-    keys = "|Commands | Description                                     |"
+    keys = "|Commands | Description                                                                |"
     line = "=" * (keys.length.to_i)
     puts line.colorize(:yellow)
     puts keys.colorize(:yellow)
     puts line.colorize(:yellow)
 
-    puts "| exit ".ljust(10, " ") + "| Will exit program".ljust(50, " ") + "|"
-    puts "-" * 60
-    puts "| top10 ".ljust(10, " ") + "| Will show top 10 cryptos with all details".ljust(50, " ") + "|"
-    puts "-" * 60
-    puts "| all ".ljust(10, " ") + "| Will show top 100 cryptos with all details".ljust(50, " ") + "|"
-    puts "-" * 60
-    puts "| restart ".ljust(10, " ") + "| Will refesh prices and restart program".ljust(50, " ") + "|"
-    puts "-" * 60
+    puts "| exit ".ljust(10, " ") + "| Will exit program. entering \'x\' will work the same".ljust(77, " ") + "|"
+    puts "-" * 87
+    puts "| top10 ".ljust(10, " ") + "| Will show top 10 cryptos with all details".ljust(77, " ") + "|"
+    puts "-" * 87
+    puts "| all ".ljust(10, " ") + "| Will show top 100 cryptos with all details".ljust(77, " ") + "|"
+    puts "-" * 87
+    puts "| restart ".ljust(10, " ") + "| Will refesh prices and restart program".ljust(77, " ") + "|"
+    puts "-" * 87
+    puts "| 1-100 ".ljust(10, " ") + "| Entering a number between 1-100 will show that many cryptos sorted by rank".ljust(77, " ") + "|"
+    puts "-" * 87
 
+    input = gets.chomp
+
+    ask_user_conditions(input)
+  end
+
+  def ask_user_conditions(input)
+    if input.downcase == "c"
+      show_commands
+    elsif input.to_i > 0 && input.to_i <101
+      number = input.to_i
+      display_coins_without_details(number)
+      ask_user_level2
+    elsif input.downcase == "exit" || input.downcase == "x"
+      austronaut
+    elsif input.downcase == "top10"
+      #show top10 method
+    elsif input.downcase == "all"
+      #show_all method
+    elsif input.downcase == "restart"
+      refresh_and_restart_program
+    else
+      puts "Entry not recognized. Here\'s a list of my commands: ".colorize(:red)
+      show_commands
+    end
   end
 
 end
