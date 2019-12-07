@@ -26,7 +26,7 @@ module CryptoPrices::Art
     """
   end
 
-  def welcome_spaceship
+  def show_welcome_spaceship
 
     puts """
                                *     .--.

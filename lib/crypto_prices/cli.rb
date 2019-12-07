@@ -6,7 +6,7 @@ class CryptoPrices::CLI
   @@counter = 0
 
   def run
-    welcome_spaceship
+    show_welcome_spaceship
     make_crypto_objects
     if @@counter < 10
       ask_user_level1
@@ -46,7 +46,7 @@ class CryptoPrices::CLI
 
   def ask_user_level1
 
-    puts "How many cryptocurrencies you would like to see?\nI will sort them by rank.\n"
+    puts "How many cryptocurrencies would you like to see?\nI will sort them by rank.\n"
     puts "simply enter any number anywhere from" + " \"1-100\"".colorize(:green)
 
     input = gets.chomp
@@ -58,7 +58,8 @@ class CryptoPrices::CLI
     elsif input.downcase == "exit"
       austronaut
     else
-      puts "not sure what that means, please enter a number between \"1-100\".".colorize(:red)
+      puts "not sure what that means. Here\'s a list of my commands: ".colorize(:red)
+      show_commands
     end
   end
 
@@ -76,7 +77,8 @@ class CryptoPrices::CLI
     elsif input.downcase == "exit"
       austronaut
     else
-      puts "not sure what that means, please enter a number between \"1-100\".".colorize(:red)
+      puts "not sure what that means. Here\'s a list of my commands: ".colorize(:red)
+      show_commands
     end
   end
 
@@ -94,14 +96,15 @@ class CryptoPrices::CLI
     elsif input.downcase == "exit"
       austronaut
     else
-      puts "not sure what that means, please enter a number between \"1-100\".".colorize(:red)
+      puts "not sure what that means. Here\'s a list of my commands: ".colorize(:red)
+      show_commands
     end
   end
 
   def ask_user_level4
     puts "\nAnother spectacular choice! You a real one!"
     puts "Keep entering a \"rank number\"" + " (1-100) ".colorize(:green) + "and I will show you more details of that certain coin."
-    puts "Otherwise,\nenter " + "\"c\"".colorize(:green) + " to show more commands that I can do."
+    puts "Otherwise,\nenter " + "\"c\"".colorize(:green) + " to show other commands that I can do."
     puts "enter " + "\"exit\"".colorize(:green) + " to end program."
 
     input = gets.chomp
@@ -110,10 +113,13 @@ class CryptoPrices::CLI
       number = input.to_i
       display_all_coin_details(number)
       ask_user_level4
+    elsif input.downcase == "c"
+      show_commands
     elsif input.downcase == "exit"
       austronaut
     else
-      puts "not sure what that means, please enter a number between \"1-100\".".colorize(:red)
+      puts "not sure what that means. Here\'s a list of my commands: ".colorize(:red)
+      show_commands
     end
   end
 
@@ -155,52 +161,24 @@ class CryptoPrices::CLI
         end
       end
     end
-    #ask_user_again
   end
 
-  def ask_user_again
+  def show_commands
+    keys = "|Commands | Description                                     |"
+    line = "=" * (keys.length.to_i)
+    puts line.colorize(:yellow)
+    puts keys.colorize(:yellow)
+    puts line.colorize(:yellow)
 
-    puts " "
-    puts "\t Want to see more cryptocurrencies?"
-    puts "\t enter a number between " + "\"1 - 100\"".colorize(:green)
-    puts "\t I can show you up to 100 coins."
-    puts " "
-    puts "\t enter " + "\"r\"".colorize(:green) + " to refresh the prices"
-    puts " "
-    puts "\t enter " + "\"exit\"".colorize(:green) + " to end program"
+    puts "| exit ".ljust(10, " ") + "| Will exit program".ljust(50, " ") + "|"
+    puts "-" * 60
+    puts "| top10 ".ljust(10, " ") + "| Will show top 10 cryptos with all details".ljust(50, " ") + "|"
+    puts "-" * 60
+    puts "| all ".ljust(10, " ") + "| Will show top 100 cryptos with all details".ljust(50, " ") + "|"
+    puts "-" * 60
+    puts "| restart ".ljust(10, " ") + "| Will refesh prices and restart program".ljust(50, " ") + "|"
+    puts "-" * 60
 
-    input = gets.chomp
-
-    if input.to_i > 0 && input.to_i <101
-      number = input.to_i
-      display_more_with_volume(number)
-      ask_user_again
-    elsif input.downcase == "exit"
-      austronaut
-    elsif input.downcase == "r"
-      refresh_prices
-    else
-      puts "not sure what that means, so the program exited.".colorize(:red)
-    end
-  end
-
-  def display_more_with_volume(input)
-    number = (input + 1)
-    show_complete_header
-
-      CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
-        if i  < number
-          if coin.p_change.to_f < 0
-            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
-            puts "-" * 102
-          else
-            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
-            puts "-" * 102
-          end
-        end
-      end
   end
 
 end
-
-#testing branch
