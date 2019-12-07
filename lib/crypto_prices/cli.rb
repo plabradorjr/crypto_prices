@@ -36,7 +36,7 @@ class CryptoPrices::CLI
     puts line.colorize(:yellow)
   end
 
-  def volume_header
+  def complete_header
     keys = "|Rank | Name                   | Price(USD)    | Market Cap (USD)  | 24hr %Change | 24hr Volume (USD)|"
     line = "=" * (keys.length.to_i)
     puts line.colorize(:yellow)
@@ -71,12 +71,30 @@ class CryptoPrices::CLI
     if input.to_i > 0 && input.to_i <101
       number = input.to_i
       display_all_details(number)
+      ask_user_level3
     elsif input.downcase == "exit"
       austronaut
     else
       puts "not sure what that means, please enter a number between \"1-100\".".colorize(:red)
     end
+  end
 
+  def ask_user_level3
+    puts "Amazing choice boss!"
+    puts "Want to see another coin with more details?"
+    puts "Simply enter its\' rank number and I will you more details."
+
+    input = gets.chomp
+
+    if input.to_i > 0 && input.to_i <101
+      number = input.to_i
+      display_all_details(number)
+      ask_user_level3
+    elsif input.downcase == "exit"
+      austronaut
+    else
+      puts "not sure what that means, please enter a number between \"1-100\".".colorize(:red)
+    end
   end
 
   def display_more(input)
@@ -104,7 +122,7 @@ class CryptoPrices::CLI
   end
 
   def display_all_details(input)
-    volume_header
+    complete_header
     number = input
     CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
       if i  == number
@@ -148,7 +166,7 @@ class CryptoPrices::CLI
 
   def display_more_with_volume(input)
     number = (input + 1)
-    volume_header
+    complete_header
 
       CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
