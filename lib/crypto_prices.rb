@@ -1,3 +1,4 @@
+require "crypto_prices/art"
 require "crypto_prices/version"
 require "crypto_prices/cli"
 require "crypto_prices/crypto"

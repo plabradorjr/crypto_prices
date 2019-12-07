@@ -1,5 +1,3 @@
-require_relative "../crypto_prices/module.rb"
-
 class CLI
 
   include Art
@@ -114,7 +112,7 @@ class CLI
     Crypto.clear_all
     @@counter = 0
     puts " "
-    puts "🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" + " prices refreshed, woot! ".colorize(:yellow)
+    puts "\n 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" + " prices refreshed, woot! ".colorize(:yellow)
     puts " "
     CLI.new.run
   end
