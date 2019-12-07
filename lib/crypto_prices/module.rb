@@ -4,13 +4,13 @@ module Art
     puts """
                       ______________________
        .-----.       ||                     |
-       /= ___  \      ||     Thanks for      |
-      |- /~~~\  |     ||      checking       |
-     |=( '.' ) |     ||   you have exited   |
-       \__\_=_/__/     ||     the program     |
+       /= ___  \      ||     " + "Thanks for".colorize(:green) + "      |
+      |- /~~~\  |     ||      " +"checking,".colorize(:green) + "      |
+     |=( '.' ) |     ||   " + "you have exited".colorize(:green) + "   |
+       \__\_=_/__/     ||     " + "the program.".colorize(:green) + "    |
       {_______}      ||                     |
     /` *       `'--._||~~~~~~~~~~~~~~~~~~~~~~
-   /=   [yolo] .     { >
+   /=   [" + "HODL".colorize(:yellow) + "] .     { >
   /  /|        |`'--'||
  (    )\_______/      ||
      \``\/       \      ||
