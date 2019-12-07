@@ -1,4 +1,4 @@
-class CLI
+class CryptoPrices::CLI
 
   include Art
 
@@ -112,7 +112,7 @@ class CLI
     Crypto.clear_all
     @@counter = 0
     puts "\n 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" + " prices refreshed, woot! \n".colorize(:yellow)
-    CLI.new.run
+    CryptoPrices::CLI.new.run
   end
 
   def display_volume
