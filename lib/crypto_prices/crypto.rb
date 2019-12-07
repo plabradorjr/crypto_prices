@@ -1,4 +1,4 @@
-class Crypto
+class CryptoPrices::Crypto
 
   attr_accessor :name, :price, :p_change, :volume, :m_cap
 
@@ -13,7 +13,7 @@ class Crypto
 
   def self.create_objects_from_array(crypto_array)
     crypto_array.each do |crypto_hash|
-      Crypto.new(crypto_hash)
+      CryptoPrices::Crypto.new(crypto_hash)
     end
   end
 

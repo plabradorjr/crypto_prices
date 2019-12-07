@@ -24,14 +24,14 @@ class CryptoPrices::CLI
     elsif @@counter >= 10
       puts "coinmarketcap.com has changed their webpage, edit your scraper file.".colorize(:red)
     else
-    Crypto.create_objects_from_array(crypto_array)
+    CryptoPrices::Crypto.create_objects_from_array(crypto_array)
     end
   end
 
   def display_top10
     all_header
 
-      Crypto.all.each.with_index(1) do |coin, i|
+      CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
         if i  < 11
           if coin.p_change.to_f < 0
             puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
@@ -95,7 +95,7 @@ class CryptoPrices::CLI
     number = (input + 1)
     all_header
 
-      Crypto.all.each.with_index(1) do |coin, i|
+      CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
           if coin.p_change.to_f < 0
             puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
@@ -109,7 +109,7 @@ class CryptoPrices::CLI
   end
 
   def refresh_prices
-    Crypto.clear_all
+    CryptoPrices::Crypto.clear_all
     @@counter = 0
     puts "\n 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" + " prices refreshed, woot! \n".colorize(:yellow)
     CryptoPrices::CLI.new.run
@@ -118,7 +118,7 @@ class CryptoPrices::CLI
   def display_volume
     volume_header
 
-    Crypto.all.each.with_index(1) do |coin, i|
+    CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
       if i  < 11
         if coin.p_change.to_f < 0
           puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
@@ -162,7 +162,7 @@ class CryptoPrices::CLI
     number = (input + 1)
     volume_header
 
-      Crypto.all.each.with_index(1) do |coin, i|
+      CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
           if coin.p_change.to_f < 0
             puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
