@@ -6,6 +6,7 @@ class CryptoPrices::CLI
   @@counter = 0
 
   def run
+    spaceship
     make_crypto_objects
     if @@counter < 10
       display_top10
