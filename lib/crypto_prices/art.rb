@@ -26,7 +26,7 @@ module CryptoPrices::Art
     """
   end
 
-  def spaceship
+  def welcome_spaceship
 
     puts """
                                *     .--.
@@ -49,6 +49,7 @@ module CryptoPrices::Art
                _.-'``                    ``'-._
              -'                                '-
     """
+    puts "Welcome to Crypto Price Checker."
   end
 
 
