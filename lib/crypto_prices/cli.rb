@@ -221,5 +221,18 @@ class CryptoPrices::CLI
         end
       end
     end
+    puts "\nWould you like to show all 100 coins? (y/n)"
+    input = gets.chomp
+
+    if input.downcase == "y"
+      show_all_crypto_with_all_details
+    elsif input.downcase == "n"
+      puts "\nOK, what would you like to do?"
+      puts "Here are my available commands:"
+      show_commands
+    else
+      puts "\nEntry not recognized. Here are available commands:"
+      show_commands
+    end
   end
 end
