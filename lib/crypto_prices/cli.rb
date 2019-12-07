@@ -14,7 +14,7 @@ class CryptoPrices::CLI
   end
 
   def make_crypto_objects
-    crypto_array = Scraper.scrape_url(WEBSITE)
+    crypto_array = CryptoPrices::Scraper.scrape_url(WEBSITE)
     # sometimes nokogiri returns blank, it could be from the main website issue
     # this if-statement makes sure nokogiri re-scrapes the site if the initial
     # scrape returns blank
