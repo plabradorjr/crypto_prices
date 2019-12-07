@@ -111,9 +111,7 @@ class CLI
   def refresh_prices
     Crypto.clear_all
     @@counter = 0
-    puts " "
-    puts "\n 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" + " prices refreshed, woot! ".colorize(:yellow)
-    puts " "
+    puts "\n 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" + " prices refreshed, woot! \n".colorize(:yellow)
     CLI.new.run
   end
 
