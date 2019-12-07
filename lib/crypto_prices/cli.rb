@@ -36,7 +36,7 @@ class CryptoPrices::CLI
     puts line.colorize(:yellow)
   end
 
-  def complete_header
+  def show_complete_header
     keys = "|Rank | Name                   | Price(USD)    | Market Cap (USD)  | 24hr %Change | 24hr Volume (USD)|"
     line = "=" * (keys.length.to_i)
     puts line.colorize(:yellow)
@@ -82,7 +82,7 @@ class CryptoPrices::CLI
   def ask_user_level3
     puts "Amazing choice boss!"
     puts "Want to see another coin with more details?"
-    puts "Simply enter its\' rank number and I will you more details."
+    puts "Simply enter its\' rank number and I will show you more details."
 
     input = gets.chomp
 
@@ -122,7 +122,7 @@ class CryptoPrices::CLI
   end
 
   def display_all_details(input)
-    complete_header
+    show_complete_header
     number = input
     CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
       if i  == number
@@ -166,7 +166,7 @@ class CryptoPrices::CLI
 
   def display_more_with_volume(input)
     number = (input + 1)
-    complete_header
+    show_complete_header
 
       CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
