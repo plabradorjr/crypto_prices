@@ -182,9 +182,9 @@ class CryptoPrices::CLI
     elsif input.downcase == "exit" || input.downcase == "x"
       austronaut
     elsif input.downcase == "top10"
-      #show top10 method
+      top10
     elsif input.downcase == "all"
-      #show_all method
+      show_all_crypto_with_all_details
     elsif input.downcase == "restart"
       refresh_and_restart_program
     else
@@ -193,4 +193,33 @@ class CryptoPrices::CLI
     end
   end
 
+  def show_all_crypto_with_all_details
+    show_complete_header
+    CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
+      if i  < 101
+        if coin.p_change.to_f < 0
+          puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
+          puts "-" * 102
+        else
+          puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
+          puts "-" * 102
+        end
+      end
+    end
+  end
+
+  def top10
+    show_complete_header
+    CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
+      if i  < 11
+        if coin.p_change.to_f < 0
+          puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
+          puts "-" * 102
+        else
+          puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:green) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
+          puts "-" * 102
+        end
+      end
+    end
+  end
 end
