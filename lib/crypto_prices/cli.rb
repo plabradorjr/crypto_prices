@@ -1,6 +1,6 @@
 class CryptoPrices::CLI
 
-  include Art
+  include CryptoPrices::Art
 
   WEBSITE = "https://coinmarketcap.com/"
   @@counter = 0
