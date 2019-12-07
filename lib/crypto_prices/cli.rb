@@ -1,4 +1,8 @@
+require_relative "../crypto_prices/module.rb"
+
 class CLI
+
+  include Art
 
   WEBSITE = "https://coinmarketcap.com/"
   @@counter = 0
@@ -78,7 +82,7 @@ class CLI
       display_more(number)
       ask_user
     elsif input.downcase == "exit"
-      puts "Thanks for checking. You have exited the program.".colorize(:green)
+      austronaut
     elsif input.downcase == "r"
       refresh_prices
     elsif input.downcase == "v"
@@ -150,7 +154,7 @@ class CLI
       display_more_with_volume(number)
       ask_user_again
     elsif input.downcase == "exit"
-      puts "Thanks for checking. You have exited the program.".colorize(:green)
+      austronaut
     elsif input.downcase == "r"
       refresh_prices
     else
