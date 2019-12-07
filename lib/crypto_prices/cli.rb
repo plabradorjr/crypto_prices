@@ -206,7 +206,20 @@ class CryptoPrices::CLI
         end
       end
     end
-  end
+    puts "\nWoah! Now you got all the details!"
+    puts "Would you like to restart the program? (y/n)"
+    puts "enter \"x\" to exit program"
+    input = gets.chomp
+
+    if input.downcase == "y"
+      refresh_and_restart_program
+    elsif input.downcase == "n"
+      puts "\nOK, what would you like to do?"
+      puts "Here are my available commands:"
+      show_commands
+    else
+      ask_user_conditions(input)
+    end  end
 
   def top10
     show_complete_header
@@ -231,8 +244,7 @@ class CryptoPrices::CLI
       puts "Here are my available commands:"
       show_commands
     else
-      puts "\nEntry not recognized. Here are available commands:"
-      show_commands
+      ask_user_conditions(input)
     end
   end
 end

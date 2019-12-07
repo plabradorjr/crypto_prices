@@ -49,7 +49,7 @@ module CryptoPrices::Art
                _.-'``                    ``'-._
              -'                                '-
     """
-    puts "Welcome to Crypto Price Checker."
+    puts "Welcome to my Flatiron crypto CLI project."
   end
 
 
