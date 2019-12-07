@@ -65,6 +65,18 @@ class CryptoPrices::CLI
   def ask_user_level2
     puts "Good choice champ!\nTo see more details about a coin,\nsimply enter the rank number."
     puts "I will show you it\'s price, market cap, volume, and much more!"
+
+    input = gets.chomp
+
+    if input.to_i > 0 && input.to_i <101
+      number = input.to_i
+      display_all_details(number)
+    elsif input.downcase == "exit"
+      austronaut
+    else
+      puts "not sure what that means, please enter a number between \"1-100\".".colorize(:red)
+    end
+
   end
 
   def display_more(input)
@@ -91,11 +103,11 @@ class CryptoPrices::CLI
     CryptoPrices::CLI.new.run
   end
 
-  def display_volume
+  def display_all_details(input)
     volume_header
-
+    number = input
     CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
-      if i  < 11
+      if i  == number
         if coin.p_change.to_f < 0
           puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
           puts "-" * 102
