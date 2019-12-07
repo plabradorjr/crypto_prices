@@ -9,7 +9,7 @@ class CryptoPrices::CLI
     welcome_spaceship
     make_crypto_objects
     if @@counter < 10
-      ask_user
+      ask_user_level1
     end
   end
 
@@ -44,7 +44,7 @@ class CryptoPrices::CLI
     puts line.colorize(:yellow)
   end
 
-  def ask_user
+  def ask_user_level1
 
     puts "How many cryptocurrencies you would like to see?\nI will sort them by rank.\n"
     puts "simply enter any number anywhere from" + " \"1-100\"".colorize(:green)
@@ -53,7 +53,7 @@ class CryptoPrices::CLI
 
     if input.to_i > 0 && input.to_i <101
       number = input.to_i
-      display_more(number)
+      display_coins_without_details(number)
       ask_user_level2
     elsif input.downcase == "exit"
       austronaut
@@ -63,14 +63,15 @@ class CryptoPrices::CLI
   end
 
   def ask_user_level2
-    puts "Good choice champ!\nTo see more details about a coin,\nsimply enter the rank number."
+    puts "\nGood choice champ!\nTo see more details about a coin,"
+    puts "simply enter the " + "\"rank number\"".colorize(:green) + "."
     puts "I will show you it\'s price, market cap, volume, and much more!"
 
     input = gets.chomp
 
     if input.to_i > 0 && input.to_i <101
       number = input.to_i
-      display_all_details(number)
+      display_all_coin_details(number)
       ask_user_level3
     elsif input.downcase == "exit"
       austronaut
@@ -80,16 +81,16 @@ class CryptoPrices::CLI
   end
 
   def ask_user_level3
-    puts "Amazing choice boss!"
+    puts "\nAmazing choice boss!"
     puts "Want to see another coin with more details?"
-    puts "Simply enter its\' rank number and I will show you more details."
+    puts "Simply enter its\' " + "\"rank number\"".colorize(:green) + " again and I will show you more details."
 
     input = gets.chomp
 
     if input.to_i > 0 && input.to_i <101
       number = input.to_i
-      display_all_details(number)
-      ask_user_level3
+      display_all_coin_details(number)
+      ask_user_level4
     elsif input.downcase == "exit"
       austronaut
     else
@@ -97,7 +98,26 @@ class CryptoPrices::CLI
     end
   end
 
-  def display_more(input)
+  def ask_user_level4
+    puts "\nAnother spectacular choice! You a real one!"
+    puts "Keep entering a \"rank number\"" + " (1-100) ".colorize(:green) + "and I will show you more details of that certain coin."
+    puts "Otherwise,\nenter " + "\"c\"".colorize(:green) + " to show more commands that I can do."
+    puts "enter " + "\"exit\"".colorize(:green) + " to end program."
+
+    input = gets.chomp
+
+    if input.to_i > 0 && input.to_i <101
+      number = input.to_i
+      display_all_coin_details(number)
+      ask_user_level4
+    elsif input.downcase == "exit"
+      austronaut
+    else
+      puts "not sure what that means, please enter a number between \"1-100\".".colorize(:red)
+    end
+  end
+
+  def display_coins_without_details(input)
     number = (input + 1)
     first_level_header
 
@@ -121,7 +141,7 @@ class CryptoPrices::CLI
     CryptoPrices::CLI.new.run
   end
 
-  def display_all_details(input)
+  def display_all_coin_details(input)
     show_complete_header
     number = input
     CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
