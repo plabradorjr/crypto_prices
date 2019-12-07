@@ -1,6 +1,7 @@
 class CryptoPrices::CLI
 
   include CryptoPrices::Art
+  include CryptoPrices::Headers
 
   WEBSITE = "https://coinmarketcap.com/"
   @@counter = 0
@@ -26,22 +27,6 @@ class CryptoPrices::CLI
     else
     CryptoPrices::Crypto.create_objects_from_array(crypto_array)
     end
-  end
-
-  def first_level_header
-    keys = "|Rank | Name                   |"
-    line = "=" * (keys.length.to_i)
-    puts line.colorize(:yellow)
-    puts keys.colorize(:yellow)
-    puts line.colorize(:yellow)
-  end
-
-  def show_complete_header
-    keys = "|Rank | Name                   | Price(USD)    | Market Cap (USD)  | 24hr %Change | 24hr Volume (USD)|"
-    line = "=" * (keys.length.to_i)
-    puts line.colorize(:yellow)
-    puts keys.colorize(:yellow)
-    puts line.colorize(:yellow)
   end
 
   def ask_user_level1
@@ -115,13 +100,8 @@ class CryptoPrices::CLI
 
       CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
-          if coin.p_change.to_f < 0
             puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "|"
             puts "-" * 31
-          else
-            puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "|"
-            puts "-" * 31
-          end
         end
       end
   end
@@ -156,8 +136,7 @@ class CryptoPrices::CLI
     puts keys.colorize(:yellow)
     puts line.colorize(:yellow)
 
-    puts "| exit ".ljust(10, " ") + "| Will exit program. entering \'x\' will work the same".ljust(77, " ") + "|"
-    puts "-" * 87
+
     puts "| top10 ".ljust(10, " ") + "| Will show top 10 cryptos with all details".ljust(77, " ") + "|"
     puts "-" * 87
     puts "| all ".ljust(10, " ") + "| Will show top 100 cryptos with all details".ljust(77, " ") + "|"
@@ -165,6 +144,10 @@ class CryptoPrices::CLI
     puts "| restart ".ljust(10, " ") + "| Will refesh prices and restart program".ljust(77, " ") + "|"
     puts "-" * 87
     puts "| 1-100 ".ljust(10, " ") + "| Entering a number between 1-100 will show that many cryptos sorted by rank".ljust(77, " ") + "|"
+    puts "-" * 87
+    puts "| c ".ljust(10, " ") + "| Will show commands".ljust(77, " ") + "|"
+    puts "-" * 87
+    puts "| exit ".ljust(10, " ") + "| Will exit program. Entering \'x\' will work the same".ljust(77, " ") + "|"
     puts "-" * 87
 
     input = gets.chomp
@@ -247,4 +230,5 @@ class CryptoPrices::CLI
       ask_user_conditions(input)
     end
   end
+
 end
