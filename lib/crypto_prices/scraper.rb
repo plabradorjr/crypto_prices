@@ -1,4 +1,4 @@
-class Scraper
+class CryptoPrices::Scraper
 
   def self.scrape_url(site)
 

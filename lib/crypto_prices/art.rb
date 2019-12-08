@@ -1,4 +1,4 @@
-module Art
+module CryptoPrices::Art
 
   def austronaut
     puts """

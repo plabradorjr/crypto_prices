@@ -1,6 +1,6 @@
-class CLI
+class CryptoPrices::CLI
 
-  include Art
+  include CryptoPrices::Art
 
   WEBSITE = "https://coinmarketcap.com/"
   @@counter = 0
@@ -14,7 +14,7 @@ class CLI
   end
 
   def make_crypto_objects
-    crypto_array = Scraper.scrape_url(WEBSITE)
+    crypto_array = CryptoPrices::Scraper.scrape_url(WEBSITE)
     # sometimes nokogiri returns blank, it could be from the main website issue
     # this if-statement makes sure nokogiri re-scrapes the site if the initial
     # scrape returns blank
@@ -24,14 +24,14 @@ class CLI
     elsif @@counter >= 10
       puts "coinmarketcap.com has changed their webpage, edit your scraper file.".colorize(:red)
     else
-    Crypto.create_objects_from_array(crypto_array)
+    CryptoPrices::Crypto.create_objects_from_array(crypto_array)
     end
   end
 
   def display_top10
     all_header
 
-      Crypto.all.each.with_index(1) do |coin, i|
+      CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
         if i  < 11
           if coin.p_change.to_f < 0
             puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
@@ -95,7 +95,7 @@ class CLI
     number = (input + 1)
     all_header
 
-      Crypto.all.each.with_index(1) do |coin, i|
+      CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
           if coin.p_change.to_f < 0
             puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|"
@@ -109,16 +109,16 @@ class CLI
   end
 
   def refresh_prices
-    Crypto.clear_all
+    CryptoPrices::Crypto.clear_all
     @@counter = 0
     puts "\n 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀" + " prices refreshed, woot! \n".colorize(:yellow)
-    CLI.new.run
+    CryptoPrices::CLI.new.run
   end
 
   def display_volume
     volume_header
 
-    Crypto.all.each.with_index(1) do |coin, i|
+    CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
       if i  < 11
         if coin.p_change.to_f < 0
           puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"
@@ -162,7 +162,7 @@ class CLI
     number = (input + 1)
     volume_header
 
-      Crypto.all.each.with_index(1) do |coin, i|
+      CryptoPrices::Crypto.all.each.with_index(1) do |coin, i|
         if i  < number
           if coin.p_change.to_f < 0
             puts "| #{i} ".ljust(6, " ") + "| #{coin.name}".ljust(25, " ") + "| #{coin.price}".ljust(16, " ") + "| #{coin.m_cap}".ljust(20, " ") + "|" + " #{coin.p_change}".ljust(14, " ").colorize(:red) + "|" + " #{coin.volume}".ljust(18, " ") + "|"

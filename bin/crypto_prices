@@ -3,4 +3,4 @@
 require "bundler/setup"
 require "crypto_prices"
 
-CLI.new.run
+CryptoPrices::CLI.new.run
