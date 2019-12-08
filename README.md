@@ -14,7 +14,7 @@ After checking out the repo, run `$ bin/setup` to install dependencies.
 
 To check the top 10 cryptocurrencies ranked by their market cap, simply enter
 ```
-$ bin/run_me
+$ bin/crypto_prices
 ```
 
 ## Development
