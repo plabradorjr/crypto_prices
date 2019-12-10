@@ -1,8 +1,8 @@
 class CryptoPrices::Scraper
 
-  def self.scrape_url(site)
+  def self.scrape_coinmarketcap
 
-    doc = Nokogiri::HTML(open(site))
+    doc = Nokogiri::HTML(open("https://coinmarketcap.com/"))
     currencies = []
 
     table = doc.css("tbody")
