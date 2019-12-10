@@ -3,37 +3,22 @@ class CryptoPrices::CLI
   include CryptoPrices::Art
   include CryptoPrices::Headers
 
-  @@counter = 0
-
   def run
     show_welcome_spaceship
     make_crypto_objects
+    ask_user_level1
   end
 
-  def make_crypto_objects # put other stuffs in the scraper.
+  def make_crypto_objects
     crypto_array = CryptoPrices::Scraper.scrape_coinmarketcap
-    # sometimes nokogiri returns blank, it could be from the main website issue
-    # this if-statement makes sure nokogiri re-scrapes the site if the initial
-    # scrape returns blank
-    if (crypto_array[0][:name] == "") && (@@counter < 10)
-      @@counter += 1
-      make_crypto_objects
-    elsif @@counter >= 10
-      puts "coinmarketcap.com has changed their webpage, edit your scraper file.".colorize(:red)
-    else
-      CryptoPrices::Crypto.create_objects_from_array(crypto_array)
-      ask_user_level1
-    end
+    CryptoPrices::Crypto.create_objects_from_array(crypto_array)
   end
-# extract repeated else logic to its own method
-# @michael slack
 
   def ask_user_level1
     puts "How many cryptocurrencies would you like to see?\nI will sort them by rank.\n"
     puts "simply enter any number anywhere from" + " \"1-100\"".colorize(:green)
 
     input = gets.chomp
-
     show_coin_ranks(input)
   end
 
@@ -44,9 +29,7 @@ class CryptoPrices::CLI
     puts "enter " + "\"exit\"".colorize(:green) + " to end program."
 
     input = gets.chomp
-
     show_coin_ranks_and_details(input)
-
   end
 
   def show_coin_ranks(input)
