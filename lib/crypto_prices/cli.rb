@@ -160,7 +160,8 @@ class CryptoPrices::CLI
       show_commands
     else
       ask_user_conditions(input)
-    end  end
+    end
+  end
 
   def top10
     show_complete_header
