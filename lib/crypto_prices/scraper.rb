@@ -18,7 +18,11 @@ class CryptoPrices::Scraper
         currencies << {name: crypto_name, price: crypto_price, p_change: price_change, volume: volume, m_cap: market_cap}
       end
 
-    currencies
+    if currencies[0][:name] == ""
+      puts "coinmarketcap.com has changed their CSS, time to change your scraper file".colorize(:red)
+    else
+      currencies
+    end
   end
 
 end
