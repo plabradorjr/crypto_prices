@@ -9,9 +9,7 @@ class CryptoPrices::CLI
   def run
     show_welcome_spaceship
     make_crypto_objects
-    if @@counter < 10
-      ask_user_level1
-    end
+    ask_user_level1 unless @@counter >= 10
   end
 
   def make_crypto_objects
