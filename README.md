@@ -1,5 +1,7 @@
 # CLI Crypto Price Checker
 
+## View a YouTube demo walk-through here: [click me](https://youtu.be/jGt6ev5CRK8)
+
 This is a command line interface (CLI) that scrapes coinmarketcap.com to show you the current top ranking cryptocurrencies based on market capitalization. Here's a sample screen shot
 
 
